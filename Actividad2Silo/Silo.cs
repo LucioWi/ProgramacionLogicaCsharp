@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Actividad2Silo
+namespace Actividad1con2Silo
 {
     public class Silo
     {

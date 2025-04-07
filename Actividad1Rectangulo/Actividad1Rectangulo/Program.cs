@@ -1,11 +1,10 @@
 ﻿using System;
-namespace Actividad1Rectangulo
+namespace Actividad1con1Rectangulo
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // Crear un rectángulo con base 3 y altura 5
             Rectangulo rect = new Rectangulo();
             rect.Ancho = 3;
             rect.Alto = 5;

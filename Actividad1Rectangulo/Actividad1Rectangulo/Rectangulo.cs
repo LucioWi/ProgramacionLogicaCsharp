@@ -5,7 +5,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Actividad1Rectangulo
+namespace Actividad1con1Rectangulo
 {
     public class Rectangulo
     {
@@ -14,21 +14,21 @@ namespace Actividad1Rectangulo
 
         public int Ancho
         {
-            get { return ancho; }
-            set { ancho = value; }
+            get { return ancho; } //propiedades
+            set { ancho = value; } //propiedades
         }
         public int Alto
         {
-            get { return alto; }
-            set { alto = value; }
+            get { return alto; } //propiedades
+            set { alto = value; } //propiedades
         }
 
-        public int CalcularPer()
+        public int CalcularPer() //metodos
         {
             return 2 * (Ancho + Alto);
         }
 
-        public int CalcularSup()
+        public int CalcularSup() //metodos
         {
             return Ancho * Alto;
         }

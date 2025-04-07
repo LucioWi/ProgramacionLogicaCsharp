@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Actividad2Silo
+namespace Actividad1con2Silo
 {
     class Program
     {
