@@ -1,9 +1,9 @@
-# Programacion Logica C#
+# Programación Lógica C#
 <p>Aquí se encuentran las distintas actividades realizadas en la materia Programación I Lógica de la Tecnicatura en Programación de la UTN FRC.</p>
 
 # ¿Qué contenidos abarcan estas actividades?
 <li>Programación orientada a objetos.</li>
-<li>Arreglos</li>
+<li>Arreglos.</li>
 <li>Relaciones de asociación y dependencia.</li>
 <li>Jerarquia de clases.</li>
 
