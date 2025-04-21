@@ -8,14 +8,14 @@ namespace ActividadBiblioteca
 {
     public class Biblioteca
     {
-            private Libro[] estanteria;
-            private int ultimo;
-            public Biblioteca(int tamanio)
+        private Libro[] estanteria;
+        private int ultimo; //Atributos
+        public Biblioteca(int tamanio)
             {
                 estanteria = new Libro[tamanio];
                 ultimo = 0;
             }
-            public void AgregarLibro(Libro oLibro)
+            public void AgregarLibro(Libro oLibro) //Catalogar cual libro es el ultimo
             {
                 if (ultimo < estanteria.Length)
                 {
@@ -23,7 +23,7 @@ namespace ActividadBiblioteca
                     ultimo++;
                 }
             }
-            public String MostrarListado()
+            public String MostrarListado() //Mostrar
             {
                 String aux = "|";
                 for (int i = 0; i < estanteria.Length; i++)

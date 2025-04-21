@@ -8,9 +8,9 @@ namespace ActividadBiblioteca
 {
     public class Libro
     {
-        private String isbn, titulo, autor;
+        private String isbn, titulo, autor; //Atributos
         private int paginas;
-        public Libro(String isbn, String titulo, String autor, int paginas)
+        public Libro(String isbn, String titulo, String autor, int paginas) //Constructor con parametros
         {
             this.isbn = isbn;
             this.titulo = titulo;
@@ -19,7 +19,7 @@ namespace ActividadBiblioteca
         }
         public String pIsbn
         {
-            get { return isbn; }
+            get { return isbn; } //Propertys
             set { isbn = value; }
         }
         public String pTitulo
@@ -37,7 +37,7 @@ namespace ActividadBiblioteca
             get { return paginas; }
             set { paginas = value; }
         }
-        public String MostrarLibro()
+        public String MostrarLibro() //Mostrar
         {
             return "Libro con ISBN: " + isbn + " creado por: " +
             autor + " tiene " + paginas + " páginas";
