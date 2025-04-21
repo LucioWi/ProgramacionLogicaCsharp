@@ -39,8 +39,8 @@ namespace ActividadBiblioteca
         }
         public String MostrarLibro() //Mostrar
         {
-            return "Libro con ISBN: " + isbn + " creado por: " +
-            autor + " tiene " + paginas + " páginas";
+            return "Libro con ISBN: " + isbn + "\nCreado por: " +
+            autor + "\nTiene " + paginas + " páginas.\n";
         }
     }
 }
