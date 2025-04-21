@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Actividad2con6Auto", "Activ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActividadBiblioteca", "..\..\..\Desktop\ActividadBiblioteca\ActividadBiblioteca.csproj", "{EE0E8FF2-6501-4D6E-9B8C-C342BDF96503}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actividades Guias", "Actividades Guias", "{F0EDFB89-6BB1-4768-9E4E-D60F1F0FBE82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Actividades Aparte", "Actividades Aparte", "{17AF5A8E-7577-4294-B676-E991E9D09EF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +46,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3CAA8E48-4B6D-BEA0-8806-F8E73DEEBA0B} = {F0EDFB89-6BB1-4768-9E4E-D60F1F0FBE82}
+		{5B3679EA-4826-4EBC-AA21-CBE763C4C10F} = {F0EDFB89-6BB1-4768-9E4E-D60F1F0FBE82}
+		{6185D863-2AD1-8779-ABFF-1E706AD132E1} = {F0EDFB89-6BB1-4768-9E4E-D60F1F0FBE82}
+		{856021E4-C94B-4878-A559-6FC84B32927A} = {F0EDFB89-6BB1-4768-9E4E-D60F1F0FBE82}
+		{EE0E8FF2-6501-4D6E-9B8C-C342BDF96503} = {17AF5A8E-7577-4294-B676-E991E9D09EF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C505CA07-42D3-48A9-9795-DEE728E6C1D2}
