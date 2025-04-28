@@ -14,7 +14,7 @@ namespace Actividad2con10Automovil
         public Tanque Tanque
         {
             get { return tanque; }
-            private set { tanque = value; }
+            set { tanque = value; }
         }
 
         public Automovil()

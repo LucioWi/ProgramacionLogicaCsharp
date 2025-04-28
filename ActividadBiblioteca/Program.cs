@@ -1,6 +1,6 @@
 ﻿namespace ActividadBiblioteca
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -8,6 +8,11 @@
 
             libro1 = new Libro("21413-4555-4", "Intro Prog en C#", "J. Kill", 260); // Rellenar de datos los libros
             libro2 = new Libro("345324-552-2", "C# for dummies", "Steven Thruss", 240);
+
+            Autor autor1, autor2;
+
+            autor1 = new Autor("nombre","nacionalidad", "Mujer", "direccion", "alias1");
+            autor2 = new Autor("nombre2", "nacionalidad2", "Hombre", "direccion2", "alias2");
 
             Console.WriteLine("----------------- LIBROS -----------------");
             Console.WriteLine(libro1.MostrarLibro()); // Mostrar libros a travez de un metodo
@@ -34,6 +39,9 @@
             oBiblioteca.AgregarLibro(libro2);
             
             Console.WriteLine(oBiblioteca.MostrarListado()); // Mostrar los libros de la biblioteca
+
+            Console.WriteLine(autor1.MostrarAutor());
+            Console.WriteLine(autor2.MostrarAutor());
         }
     }
 }
