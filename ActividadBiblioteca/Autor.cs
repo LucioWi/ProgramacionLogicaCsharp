@@ -8,7 +8,7 @@ namespace ActividadBiblioteca
 {
     public class Autor : Persona
     {
-        private String alias = "";
+        private String alias = String.Empty;
         public String Alias
         {
             get { return alias; }
@@ -16,9 +16,10 @@ namespace ActividadBiblioteca
         }
         public Autor(String NombreYApe, String Nacionalidad, String Sexo, String Direccion, String Alias) : base (NombreYApe, Nacionalidad, Sexo, Direccion) 
         {}
-        public String MostrarAutor() //Mostrar
+        public override string ToString() //Mostrar
         {
-            return base.MostrarPersona() + "\nAlias: " + alias;
+            return "\nAutor:" + "\nNombre y Apellido: " + nombreYApe + "\nNacionalidad: " +
+            nacionalidad + "\nSexo: " + sexo + "\nDireccion: " + direccion+"\nAlias: "+ alias;
         }
     }
 }

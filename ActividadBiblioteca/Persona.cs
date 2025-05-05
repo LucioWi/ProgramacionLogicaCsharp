@@ -20,7 +20,7 @@ namespace ActividadBiblioteca
             sexo = Sexo;
             direccion = Direccion;
         }
-        public String MostrarPersona() //Mostrar
+        public override string ToString() //Mostrar
         {
             return "\nAutor:" + "\nNombre y Apellido: " + nombreYApe + "\nNacionalidad: " +
             nacionalidad + "\nSexo: " + sexo + "\nDireccion: " + direccion;

@@ -5,9 +5,11 @@
         static void Main(string[] args)
         {
             Libro libro1, libro2; // Definir libros
+            Revista revista;
 
-            libro1 = new Libro("21413-4555-4", "Intro Prog en C#", "J. Kill", 260); // Rellenar de datos los libros
-            libro2 = new Libro("345324-552-2", "C# for dummies", "Steven Thruss", 240);
+            libro1 = new Libro("Intro Prog en C#", "21413-4555-4", "J. Kill", 260); // Rellenar de datos los libros
+            libro2 = new Libro("C# for dummies", "345324-552-2", "Steven Thruss", 240);
+            revista = new Revista("Titulo", 2555, 500);
 
             Autor autor1, autor2;
 
@@ -15,16 +17,17 @@
             autor2 = new Autor("nombre2", "nacionalidad2", "Hombre", "direccion2", "alias2");
 
             Console.WriteLine("----------------- LIBROS -----------------");
-            Console.WriteLine(libro1.MostrarLibro()); // Mostrar libros a travez de un metodo
-            Console.WriteLine(libro2.MostrarLibro());
+            Console.WriteLine(libro1.ToString()); // Mostrar libros a travez de un metodo
+            Console.WriteLine(libro2.ToString());
+            Console.WriteLine(revista.ToString());
             Console.WriteLine("------------------------------------------");
-            if (libro1.pPaginas > libro2.pPaginas) // Condicional para averiguar cual libro es mas grande en paginas
+            if (libro1.Paginas > libro2.Paginas) // Condicional para averiguar cual libro es mas grande en paginas
             {
                 Console.WriteLine("\nLibro 1 es el que tiene más páginas\n");
             }
             else
             {
-                if (libro2.pPaginas > libro1.pPaginas)
+                if (libro2.Paginas > libro1.Paginas)
                 {
                     Console.WriteLine("\nLibro 2 es el que tiene más páginas\n");
                 }
@@ -37,11 +40,12 @@
             
             oBiblioteca.AgregarLibro(libro1); // Agregar libros a la biblioteca
             oBiblioteca.AgregarLibro(libro2);
+            oBiblioteca.AgregarLibro(revista);
             
             Console.WriteLine(oBiblioteca.MostrarListado()); // Mostrar los libros de la biblioteca
 
-            Console.WriteLine(autor1.MostrarAutor());
-            Console.WriteLine(autor2.MostrarAutor());
+            Console.WriteLine(autor1.ToString());
+            Console.WriteLine(autor2.ToString());
         }
     }
 }
