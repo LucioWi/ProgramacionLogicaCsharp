@@ -12,7 +12,7 @@ función devuelve un 1. Se recomienda usar constantes para devolver
 estos valores.
 o esMayorDeEdad(): indica si es mayor de edad(21 años), devuelve un
 booleano. 
- */
+*/
 
 using System;
 

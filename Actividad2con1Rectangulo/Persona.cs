@@ -8,7 +8,7 @@ namespace Actividad2con4Persona
 {
     public class Persona
     {
-        private string nombre = "";
+        private string nombre = string.Empty;
         private int edad = 0;
         private char sexo = '0';
         private double peso= 0 , altura = 0;
@@ -20,23 +20,23 @@ namespace Actividad2con4Persona
         }
         public int Edad
         {
-            get { return edad; } //propiedades
-            set { edad = value; } //propiedades
+            get { return edad; } 
+            set { edad = value; } 
         }
         public char Sexo
         {
-            get { return sexo; } //propiedades
-            set { sexo = value; } //propiedades
+            get { return sexo; } 
+            set { sexo = value; } 
         }
         public double Peso
         {
-            get { return peso; } //propiedades
-            set { peso = value; } //propiedades
+            get { return peso; } 
+            set { peso = value; } 
         }
         public double Altura
         {
-            get { return altura; } //propiedades
-            set { altura = value; } //propiedades
+            get { return altura; } 
+            set { altura = value; } 
         }
 
         public double calcularIMC()

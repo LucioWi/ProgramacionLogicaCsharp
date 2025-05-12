@@ -24,7 +24,7 @@ namespace ActividadBiblioteca
         }
         public override string ToString() //Mostrar
         {
-            return "\nAutor:" + "\nNombre y Apellido: " + nombreYApe + "\nNacionalidad: " +
+            return "\nAutor:" + nombreYApe + "\nNacionalidad: " +
             nacionalidad + "\nSexo: " + sexo + "\nDireccion: " + direccion+"\nAlias: "+ alias;
         }
     }
