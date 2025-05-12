@@ -1,33 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ActividadBiblioteca;
 
-namespace ActividadBiblioteca
+namespace AppBiblioteca
 {
     public class Libro : Publicacion
     {
-        private String isbn="", autor=""; //Atributos
+        private string isbn;
+        private Autor autor;
 
-        public String pIsbn
+        public string PIsbn
         {
-            get { return isbn; } //Propertys
+            get { return isbn; }
             set { isbn = value; }
         }
-        
-        public String pAutor
+
+        public Autor PAutor
         {
             get { return autor; }
             set { autor = value; }
         }
 
-        public Libro(String titulo, String pIsbn, String pAutor, int paginas) : base(titulo, paginas)
-        { }
+        public Libro(string pIsbn, Autor pAutor, string titulo, int paginas) : base(titulo, paginas)
+        {
+            this.isbn = pIsbn;
+            this.autor = pAutor;
+        }
+
         public override string ToString()
         {
-            return "Libro titulado:"+Titulo+"\nCon ISBN: " + isbn + "\nCreado por: " +
-            autor + "\nTiene " + Paginas + " páginas.\n";
+            return "Libro titulado: " + Titulo +
+                   "\nCon ISBN: " + isbn +
+                   "\nCreado por: " + autor +
+                   "\nTiene " + Paginas + " páginas.\n";
         }
     }
 }

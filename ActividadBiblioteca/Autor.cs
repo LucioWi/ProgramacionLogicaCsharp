@@ -14,8 +14,14 @@ namespace ActividadBiblioteca
             get { return alias; }
             set { alias = value; }
         }
-        public Autor(String NombreYApe, String Nacionalidad, String Sexo, String Direccion, String Alias) : base (NombreYApe, Nacionalidad, Sexo, Direccion) 
-        {}
+        public Autor() : base()
+        {
+            alias = string.Empty;
+        }
+        public Autor(String NombreYApe, String Nacionalidad, String Sexo, String Direccion, String alias) : base (NombreYApe, Nacionalidad, Sexo, Direccion) 
+        {
+            this.alias = alias;
+        }
         public override string ToString() //Mostrar
         {
             return "\nAutor:" + "\nNombre y Apellido: " + nombreYApe + "\nNacionalidad: " +

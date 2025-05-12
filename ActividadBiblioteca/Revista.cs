@@ -17,7 +17,9 @@ namespace ActividadBiblioteca
         }
 
         public Revista(String titulo, int codigo, int paginas) : base(titulo, paginas)
-        { }
+        { 
+            this.codigo = codigo;
+        }
         public override string ToString()
         {
             return "Revista titulada:" + Titulo + "\nCon el código: " + Codigo + "\nTiene " + Paginas + " páginas.\n";

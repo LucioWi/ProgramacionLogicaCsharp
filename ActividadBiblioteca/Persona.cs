@@ -13,6 +13,13 @@ namespace ActividadBiblioteca
         protected String sexo = "";
         protected String direccion = "";
 
+        public Persona() // Constructor por defecto (necesario para Autor())
+        {
+            nombreYApe = "";
+            nacionalidad = "";
+            sexo = "";
+            direccion = "";
+        }
         public Persona(String NombreYApe, String Nacionalidad, String Sexo, String Direccion)
         {
             nombreYApe = NombreYApe;

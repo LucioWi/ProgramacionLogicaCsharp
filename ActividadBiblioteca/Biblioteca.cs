@@ -15,20 +15,22 @@ namespace ActividadBiblioteca
                 estanteria = new Publicacion[tamanio];
                 ultimo = 0;
             }
-            public void AgregarLibro(Publicacion oPublicacion) //Catalogar cual libro es el ultimo
-            {
-                if (ultimo < estanteria.Length)
+        public void AgregarLibro(Publicacion oPublicacion) //Catalogar cual libro es el ultimo
+        {
+            if (ultimo < estanteria.Length)
                 {
                     estanteria[ultimo] = oPublicacion;
                     ultimo++;
                 }
             }
-            public String MostrarListado() //Mostrar
+        public String MostrarListado() // Mostrar
+        {
+            String aux = "|";
+            for (int i = 0; i < ultimo; i++) 
             {
-                String aux = "|";
-                for (int i = 0; i < estanteria.Length; i++)
-                    aux += estanteria[i] + "|";
-                return aux;
+                aux += estanteria[i].ToString() + "|"; 
+            }
+            return aux;
         }
     }
 }
