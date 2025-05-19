@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActividadTorneos", "Activid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actividad2con4PersonaForms", "Actividad2con4PersonaForms\Actividad2con4PersonaForms.csproj", "{EC3DEACB-659D-4F71-AB3A-3AA76FA1BD11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actividad4con13personas", "Actividad4con13personas\Actividad4con13personas.csproj", "{6993FCEC-0101-4D08-B97A-01AB0BF0040A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{EC3DEACB-659D-4F71-AB3A-3AA76FA1BD11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC3DEACB-659D-4F71-AB3A-3AA76FA1BD11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC3DEACB-659D-4F71-AB3A-3AA76FA1BD11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6993FCEC-0101-4D08-B97A-01AB0BF0040A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6993FCEC-0101-4D08-B97A-01AB0BF0040A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6993FCEC-0101-4D08-B97A-01AB0BF0040A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6993FCEC-0101-4D08-B97A-01AB0BF0040A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{CD80B199-817E-495F-A778-736D6A282B32} = {F0EDFB89-6BB1-4768-9E4E-D60F1F0FBE82}
 		{B391ACDB-3365-4EAA-9198-98DB85FFC3E8} = {17AF5A8E-7577-4294-B676-E991E9D09EF6}
 		{EC3DEACB-659D-4F71-AB3A-3AA76FA1BD11} = {17AF5A8E-7577-4294-B676-E991E9D09EF6}
+		{6993FCEC-0101-4D08-B97A-01AB0BF0040A} = {F0EDFB89-6BB1-4768-9E4E-D60F1F0FBE82}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C505CA07-42D3-48A9-9795-DEE728E6C1D2}
