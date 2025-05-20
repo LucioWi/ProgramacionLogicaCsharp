@@ -1,65 +1,144 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
 namespace Actividad4con13personas
 {
     public partial class FormABMpersonas : Form
     {
+        bool esNuevo = false;
+
         public FormABMpersonas()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void FormABMpersonas_Load(object sender, EventArgs e)
         {
-
+            habilitar(false);
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void habilitar(bool x)
         {
-
+            ApellidoBox.Enabled = x;
+            NombreBox.Enabled = x;
+            TipoDocList.Enabled = x;
+            DocBox.Enabled = x;
+            EstCivilList.Enabled = x;
+            MujerRadio.Enabled = x;
+            HombreRadio.Enabled = x;
+            FallecidoCheck.Enabled = x;
+            Grabar.Enabled = x;
+            Cancelar.Enabled = x;
+            Nuevo.Enabled = !x;
+            Editar.Enabled = !x;
+            Borrar.Enabled = !x;
+            Salir.Enabled = !x;
+            PersonasList.Enabled = !x;
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        private void limpiar()
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            ApellidoBox.Text = "";
+            NombreBox.Text = "";
+            TipoDocList.SelectedIndex = -1;
+            DocBox.Text = "";
+            EstCivilList.SelectedIndex = -1;
+            MujerRadio.Checked = false;
+            HombreRadio.Checked = false;
+            FallecidoCheck.Checked = false;
         }
 
         private void Nuevo_Click(object sender, EventArgs e)
         {
-
+            esNuevo = true;
+            habilitar(true);
+            limpiar();
+            ApellidoBox.Focus();
         }
 
         private void Editar_Click(object sender, EventArgs e)
         {
+            if (PersonasList.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione una persona para editar.");
+                return;
+            }
 
+            esNuevo = false;
+            habilitar(true);
+            DocBox.Enabled = false;
+
+            Persona p = (Persona)PersonasList.SelectedItem;
+            ApellidoBox.Text = p.Apellido;
+            NombreBox.Text = p.Nombres;
+            TipoDocList.SelectedIndex = p.TipoDocumento;
+            DocBox.Text = p.Documento.ToString();
+            EstCivilList.SelectedIndex = p.EstadoCivil;
+            HombreRadio.Checked = (p.Sexo == 1);
+            MujerRadio.Checked = (p.Sexo == 0);
+            FallecidoCheck.Checked = p.Fallecio;
         }
 
         private void Borrar_Click(object sender, EventArgs e)
         {
-
+            int index = PersonasList.SelectedIndex;
+            if (index != -1)
+            {
+                PersonasList.Items.RemoveAt(index);
+                limpiar();
+            }
         }
 
         private void Grabar_Click(object sender, EventArgs e)
         {
+            Persona p = new Persona
+            {
+                Apellido = ApellidoBox.Text,
+                Nombres = NombreBox.Text,
+                TipoDocumento = TipoDocList.SelectedIndex,
+                Documento = int.TryParse(DocBox.Text, out int doc) ? doc : 0,
+                EstadoCivil = EstCivilList.SelectedIndex,
+                Sexo = HombreRadio.Checked ? 1 : 0, // 1: Hombre, 0: Mujer
+                Fallecio = FallecidoCheck.Checked
+            };
 
+            if (esNuevo)
+            {
+                PersonasList.Items.Add(p);
+            }
+            else
+            {
+                int index = PersonasList.SelectedIndex;
+                if (index != -1)
+                {
+                    PersonasList.Items[index] = p;
+                }
+            }
+
+            limpiar();
+            habilitar(false);
+            esNuevo = false;
         }
 
         private void Cancelar_Click(object sender, EventArgs e)
         {
-
+            limpiar();
+            habilitar(false);
+            esNuevo = false;
         }
 
         private void Salir_Click_1(object sender, EventArgs e)
         {
-
+            if (MessageBox.Show("¿Seguro que quiere salir?",
+                "SALIR", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                this.Close();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -103,15 +182,6 @@ namespace Actividad4con13personas
         }
 
         private void FallecidoCheck_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void Salir_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void FormABMpersonas_Load(object sender, EventArgs e)
         {
 
         }
