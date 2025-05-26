@@ -188,7 +188,7 @@ namespace Actividad4con13personas
     }
 }
 /*
- using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -206,7 +206,8 @@ namespace ABMPersonas
 
         SqlConnection miConexion = new SqlConnection("Data Source=172.16.10.196;Initial Catalog=TUPPI;User ID=alumno1w1; Encrypt = false; Password=alumno1w1");
         SqlCommand miComando = null;
-
+        const int tamanio=100;
+        Persona[] aPersonas = new Persona[tamanio];
         private void CargarCombo(ComboBox combo, string nombreTabla)
         {
             miConexion.Open();
@@ -235,104 +236,314 @@ namespace ABMPersonas
             habilitar(false);
             CargarCombo(cboTipoDocumento, "tipo_documento");
             CargarCombo(cboEstadoCivil, "estado_civil");
+            CargarLista();
+        }
+
+        private void CargarLista()
+        {
+            miConexion.Open();
+            miComando = new SqlCommand();
+            miComando.Connection = miConexion;
+            miComando.CommandType = CommandType.Text;
+            miComando.CommandText = "Select * from Personas";
+
+            SqlDataReader dr = miComando.ExecuteReader(); /*datareader = conectado | datatable = no conectado
+
+int posicion = 0;
+
+while (dr.Read()) /*lee hasta el final del data reader
+{
+    Persona p = new Persona();
+
+    if (!dr.IsDBNull(0)) /*con esto deja de dar un error si es null
+        p.Apellido = dr[0].ToString(); /*Opcion 1 con la posicion
+    if (!dr.IsDBNull(1))
+        p.Nombres = dr["nombres"].ToString(); /*Opcion 2 con el nombre directamente
+    if (!dr.IsDBNull(2))
+        p.TipoDocumento = dr.GetInt32(2); /*Opcion 3 solo para enteros | Si es null dará error
+    if (!dr.IsDBNull(3))
+        p.Documento = Convert.ToInt32(dr[3].ToString());/*Opcion 4 Documento se vuelve string y luego vuelve a entero | Si el valor es nulo puede dar error
+    if (!dr.IsDBNull(4))
+        p.EstadoCivil = dr.GetInt32(4);
+    if (!dr.IsDBNull(5))
+        p.Sexo = dr.GetInt32(5);
+    if (!dr.IsDBNull(6))
+        p.Fallecio = dr.GetBoolean(6); /*Opcion 5 para booleanos
+    if (!dr.IsDBNull(7))
+        p.FechaNacimiento = dr.GetDateTime(7);/*Opcion 6 para datetimes
+
+    aPersonas[posicion] = p;
+    posicion++;
+
+    if (posicion == tamanio)
+    {
+        break;
+    }
+}
+dr.Close();
+miConexion.Close();
+
+lstPersonas.Items.Clear(); //Ya que se piensa agregar, modificar y eliminar personas. Con esto carga y se recarga
+//lstPersonas.DataSource= aPersonas; /*Muestra el arreglo en la listbox
+for (int i = 0; i < posicion; i++)
+{
+    lstPersonas.Items.Add(aPersonas[i]);
+}
+            
             
         }
-        
-  
+
         private void habilitar(bool x)
+{
+    txtApellido.Enabled = x;
+    txtNombres.Enabled = x;
+    cboTipoDocumento.Enabled = x;
+    txtDocumento.Enabled = x;
+    cboEstadoCivil.Enabled = x;
+    dtpFechaNacimiento.Enabled = x;
+    rbtFemenino.Enabled = x;
+    rbtMasculino.Enabled = x;
+    chkFallecio.Enabled = x;
+    btnGrabar.Enabled = x;
+    btnCancelar.Enabled = x;
+    btnNuevo.Enabled = !x;
+    btnEditar.Enabled = !x;
+    btnBorrar.Enabled = !x;
+    btnSalir.Enabled = !x;
+    lstPersonas.Enabled = !x;
+}
+
+private void limpiar()
+{
+    txtApellido.Text = "";
+    txtNombres.Text = "";
+    cboTipoDocumento.SelectedIndex = -1;
+    txtDocumento.Text = "";
+    cboEstadoCivil.SelectedIndex = -1;
+    dtpFechaNacimiento.Value = DateTime.Today;
+    rbtFemenino.Checked = false;
+    rbtMasculino.Checked = false;
+    chkFallecio.Checked = false;
+}
+
+private void btnNuevo_Click(object sender, EventArgs e)
+{
+    esNuevo = true;
+    habilitar(true);
+    limpiar();
+    txtApellido.Focus();
+}
+
+private void btnEditar_Click(object sender, EventArgs e)
+{
+    habilitar(true);
+    txtDocumento.Enabled = false;
+    txtApellido.Focus();
+}
+
+private void btnBorrar_Click(object sender, EventArgs e) //No se suelen borrar datos hoy en día
+{
+    if (MessageBox.Show("¿Está seguro de eliminar esta persona?"
+        , "¿Borrar?"
+        , MessageBoxButtons.YesNo
+        , MessageBoxIcon.Warning
+        , MessageBoxDefaultButton.Button2)
+        == DialogResult.Yes)
+    {
+        miConexion.Open();
+
+        miComando = new SqlCommand();
+        miComando.Connection = miConexion;
+        miComando.CommandType = CommandType.Text;
+        miComando.CommandText = "Delete from Personas where documento = " + aPersonas[lstPersonas.SelectedIndex].Documento;
+        miComando.ExecuteNonQuery(); //Para ejecutar un comando sin más (Sin filas o columnas involucradas)
+
+        miConexion.Close();
+
+        CargarLista(); //Actualizar la lista gracias al metodo ya creado
+    }
+}
+
+private void btnCancelar_Click(object sender, EventArgs e)
+{
+
+    limpiar();
+    habilitar(false);
+    esNuevo = false;
+}
+
+private void btnGrabar_Click(object sender, EventArgs e)
+{
+    Persona p = new Persona();
+
+    if (ValidarDatos())
+    {
+        p.Apellido = txtApellido.Text;
+        p.Nombres = txtNombres.Text;
+        p.TipoDocumento = (int)cboTipoDocumento.SelectedValue;
+        p.Documento = int.Parse(txtDocumento.Text); // funciona igual que la anterior
+        p.EstadoCivil = (int)cboEstadoCivil.SelectedValue;
+        p.FechaNacimiento = dtpFechaNacimiento.Value;
+
+        if (rbtMasculino.Checked)
+            p.Sexo = 1;
+        else
+            p.Sexo = 0;
+        p.Fallecio = chkFallecio.Checked;
+
+
+    }
+
+    if (esNuevo)
+    {
+
+        // VALIDAR QUE NO EXISTA LA PK !!!!!! (SI NO ES AUTOINCREMENTAL / IDENTITY)
+        if (!ExistePK(p.Documento))
         {
-            txtApellido.Enabled = x;
-            txtNombres.Enabled = x;
-            cboTipoDocumento.Enabled = x;
-            txtDocumento.Enabled = x;
-            cboEstadoCivil.Enabled = x;
-            dtpFechaNacimiento.Enabled = x;
-            rbtFemenino.Enabled = x;
-            rbtMasculino.Enabled = x;
-            chkFallecio.Enabled = x;
-            btnGrabar.Enabled = x;
-            btnCancelar.Enabled = x;
-            btnNuevo.Enabled = !x;
-            btnEditar.Enabled = !x;
-            btnBorrar.Enabled = !x;
-            btnSalir.Enabled = !x;
-            lstPersonas.Enabled = !x;
+            /* insert con sentencia SQL tradicional
+
+            string consultaSQL = "Insert into Personas Values ('"+p.Apellido+"', '"+p.Nombres+"', "+p.TipoDocumento+", "+p.Documento+", "+p.EstadoCivil+", "+p.Sexo+", "+", '"+p.Fallecio+"', '"+p.FechaNacimiento.ToString("yyyy/MM/dd")+"')";
+            miConexion.Open();
+
+            miComando = new SqlCommand();
+            miComando.Connection = miConexion;
+            miComando.CommandType = CommandType.Text;
+            miComando.CommandText = consultaSQL;
+            miComando.ExecuteNonQuery(); //Para ejecutar un comando sin más (Sin filas o columnas involucradas)
+
+            miConexion.Close();
+
+            CargarLista(); //Actualizar la lista gracias al metodo ya creado
+
+            fin del comentario aca
+
+            // insert usando parámetros
+            string consultaSQL = "Insert into Personas Values (@apellido,@nombres,@tipo_documento,@documento,@estado_civil,@sexo,@fallecio,@fecha_nacimiento)";
+
+            miConexion.Open();
+
+            miComando = new SqlCommand();
+            miComando.Connection = miConexion;
+            miComando.CommandType = CommandType.Text;
+            miComando.CommandText = consultaSQL;
+            miComando.Parameters.AddWithValue("@apellido", p.Apellido);
+
+            miComando.ExecuteNonQuery(); //Para ejecutar un comando sin más (Sin filas o columnas involucradas)
+
+            miConexion.Close();
+
+            CargarLista();
         }
 
-        private void limpiar()
-        {
-            txtApellido.Text = "";
-            txtNombres.Text = "";
-            cboTipoDocumento.SelectedIndex = -1;
-            txtDocumento.Text = "";
-            cboEstadoCivil.SelectedIndex = -1;
-            dtpFechaNacimiento.Value = DateTime.Today;
-            rbtFemenino.Checked = false;
-            rbtMasculino.Checked = false;
-            chkFallecio.Checked = false;
-        }
-      
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            esNuevo = true;
-            habilitar(true);
-            limpiar();
-            txtApellido.Focus();
-        }
+        habilitar(false);
+        esNuevo = false;
+    }
+}
 
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            habilitar(true);
-            txtDocumento.Enabled = false;
-            txtApellido.Focus();
-        }
+private bool ExistePK(object documento)
+{
+    int pk = 0;
 
-        private void btnBorrar_Click(object sender, EventArgs e)
-        {
-                
+    miConexion.Open();
 
-        }
+    miComando = new SqlCommand();
+    miComando.Connection = miConexion;
+    miComando.CommandType = CommandType.Text;
+    miComando.CommandText = "Select * from Personas where documento = " + pk;
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            
-            limpiar();
-            habilitar(false);
-            esNuevo = false;
-        }
+    DataTable miTabla = new DataTable();
+    miTabla.Load(miComando.ExecuteReader());
 
-        private void btnGrabar_Click(object sender, EventArgs e)
-        {
-    
+    miConexion.Close();
 
-            if (esNuevo) 
-                {
+    if (miTabla.Rows.Count > 0)
+        return true;
+    else
+        return false;
+}
 
-                    // VALIDAR QUE NO EXISTA LA PK !!!!!! (SI NO ES AUTOINCREMENTAL / IDENTITY)
+private bool ValidarDatos()
+{
+    if (txtApellido.Text == string.Empty)
+    {
+        MessageBox.Show("Debe ingresar apellido."); /*Saltar un cartel
+        txtApellido.Focus(); /*Fijar el form en apellido para facilitar la corrección
+        return false;
+    }
 
-                    // insert con sentencia SQL tradicional
+    if (txtNombres.Text.Equals(string.Empty)) /*funciona igual que el anterior
+    {
+        MessageBox.Show("Debe ingresar nombre.");
+        txtNombres.Focus();
+        return false;
+    }
 
-                    // insert usando parámetros
+    if (cboTipoDocumento.SelectedIndex == -1) /*para combo box
+    {
+        MessageBox.Show("Debe ingresar un tipo de documento.");
+        cboTipoDocumento.Focus();
+        return false;
+    }
 
+    if (txtDocumento.Equals(string.Empty))
+    {
+        MessageBox.Show("Debe ingresar documento.");
+        txtDocumento.Focus();
+        return false;
+    }
 
-                habilitar(false);
-                esNuevo = false;
-            }
-        }
+    if (cboEstadoCivil.SelectedIndex == -1)
+    {
+        MessageBox.Show("Debe ingresar estado civil.");
+        cboEstadoCivil.Focus();
+        return false;
+    }
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Seguro de abandonar la aplicación ?",
-                "SALIR", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+    if (dtpFechaNacimiento.Value > DateTime.Today)
+    {
+        MessageBox.Show("Ingrese una fecha de nacimiento real.");
+        dtpFechaNacimiento.Focus();
+        return false;
+    }
 
-                this.Close();
-        }
+    if (!rbtMasculino.Checked && !rbtFemenino.Checked)
+    {
+        MessageBox.Show("Debe elegir un sexo.");
+        rbtMasculino.Focus();
+        return false;
+    }
 
-        private void lstPersonas_SelectedIndexChanged(object sender, EventArgs e)
-        {
+    return true;
+}
 
-        }
+private void btnSalir_Click(object sender, EventArgs e)
+{
+    if (MessageBox.Show("Seguro de abandonar la aplicación ?",
+        "SALIR", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+        MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+
+        this.Close();
+}
+
+private void lstPersonas_SelectedIndexChanged(object sender, EventArgs e)
+{
+    CargarCampos(aPersonas[lstPersonas.SelectedIndex]); /*SelectedIndex = La posición de la lista en la que el usuario esta seleccionando
+}
+
+private void CargarCampos(Persona persona)
+{
+    txtApellido.Text = persona.Apellido;
+    txtNombres.Text = persona.Nombres;
+    txtDocumento.Text = persona.Documento.ToString(); /*Convertirlo en string para evitar errores
+    cboTipoDocumento.SelectedValue = persona.TipoDocumento; /*Para combo box
+    cboEstadoCivil.SelectedValue = persona.EstadoCivil;
+    dtpFechaNacimiento.Value = persona.FechaNacimiento; /*Para datetime
+    if (persona.Sexo == 1) /*Para radio buttons con 2 alternativas*/ /*si es nulo pondrá femenino
+        rbtMasculino.Checked = true;
+    else rbtFemenino.Checked = true;
+
+    chkFallecio.Checked = persona.Fallecio; /*Para check box | booleano
+}
     }
 }
 
