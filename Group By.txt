@@ -1,0 +1,92 @@
+use LIBRERIAAAAAAAAAAA
+
+select count(*) as 'Cantidad de facturas' -- Cuenta la cantidad de registros que tiene la tabla
+from FACTURAS
+
+select count(*) as 'Cantidad de detalles de facturas',
+count(distinct f.nro_factura) 'Cantidad de facturas', -- Cuenta la cantidad de facturas sin repeticiones y de sus detalles a la vez
+count(d.nro_factura) 'Cantidad de ¿?'
+from FACTURAS as f join detalle_facturas as d on d.NRO_FACTURA = f.NRO_FACTURA
+where year(FECHA) = 2020
+
+select count(*) as 'Cantidad de facturas',
+count(distinct f.COD_CLIENTE) as 'Cantidad de clientes',
+count(*)/count(distinct f.COD_CLIENTE) as 'Promedio de facturas por cliente'
+from FACTURAS as f join CLIENTES as c on c.COD_CLIENTE = f.COD_CLIENTE
+where year(FECHA) = 2020
+
+select count(*) as 'Cantidad de clientes',
+count(nro_tel) as 'Cantidad con telefono',
+count([e-mail]) as 'Cantidad con email'
+from CLIENTES
+
+select max(pre_unitario) as 'Más caro', -- Muestra el precio mas elevado
+min(pre_unitario) as 'Más barato' -- Muestra el precio mas bajo
+from articulos
+
+select avg(pre_unitario) promedio -- Saca promedios
+from articulos
+
+select 2020 as 'Año', sum(cantidad*pre_unitario) as 'Facturación total' -- Toda la venta realizada
+
+from FACTURAS as f join detalle_facturas as d on d.NRO_FACTURA = f.NRO_FACTURA
+where year(FECHA) = 2020
+
+-- Se quiere saber la cantidad de ventas que hizo el vendedor de código 3.
+
+select count(f.cod_vendedor) as 'Cantidad de ventas que hizo el vendedor 3'
+from vendedores as v join facturas as f on f.cod_vendedor = v.cod_vendedor
+where f.cod_vendedor = 3
+
+-- Resolver la misma consulta anterior, pero no por el código sino por el
+-- nombre ‘Alejandro’ y apellido ‘Lopez’ del vendedor.
+
+select count(f.cod_vendedor) as 'Cantidad de ventas que hizo el vendedor Alejandro Lopez'
+from vendedores as v join facturas as f on f.cod_vendedor = v.cod_vendedor
+where nom_vendedor = 'Alejandro' and
+ape_vendedor = 'Lopez'
+
+-- ¿Cuál fue la fecha de la primera y última venta que se realizó en este
+-- negocio?select min(fecha) as 'Fecha de la primer venta', max(fecha) as 'Fecha de la última vneta'from facturas-- Mostrar la siguiente información respecto a la factura Nro.: 450: cantidad
+-- total de unidades vendidas, la cantidad de artículos diferentes vendidos y
+-- el importe total.
+
+Select sum(cantidad) as 'Cantidad total de productos', count(cantidad) as 'Cantidad de productos distintos', sum(pre_unitario*cantidad) as 'Monto total'
+from facturas as f join detalle_facturas as d on f.nro_factura = d.nro_factura
+where f.nro_factura = 450
+
+-- ¿Cuál fue la cantidad total de unidades vendidas, importe total y el importe
+-- promedio para vendedores cuyos nombres comienzan con letras que van
+-- de la “d” a la “l”?
+
+select sum(cantidad) as 'Cantidad de unidades vendidas', sum(pre_unitario*cantidad) as 'Monto total', avg(pre_unitario*cantidad) Promedio
+from vendedores as v join facturas as f on v.cod_vendedor = f.cod_vendedor 
+join detalle_facturas as d on f.nro_factura = d.nro_factura
+
+where nom_vendedor like '[d-l]%'
+
+-- Cuantas facturas se hicieron por cada año [Group by]
+
+select year(fecha) as 'Año', count(*) as 'Cantidad de facturas'
+from FACTURAS as f
+group by year(FECHA)
+order by year(fecha) desc
+
+-- Montos de las facturas del año 2016
+
+Select f.nro_factura, sum(cantidad*pre_unitario) as 'Monto total',
+count(*) 'Cantidad de detalles'
+from facturas as f join detalle_facturas as d on f.nro_factura = d.nro_factura
+where year(fecha) = 2016
+group by f.nro_factura
+
+-- Cuanto le vendió cada vendedor a cada cliente en 2020
+
+select ape_vendedor as 'Vendedor', f.cod_vendedor, ape_cliente as 'Cliente', f.cod_cliente, sum(cantidad*pre_unitario) as 'Monto total'
+from facturas as f join detalle_facturas as d on f.nro_factura = d.nro_factura
+join vendedores as v on v.cod_vendedor = f.cod_vendedor
+join clientes as c on c.cod_cliente = f.cod_cliente
+
+where year(fecha) = 2020
+group by f.cod_vendedor, ape_vendedor, f.cod_cliente, ape_cliente
+order by f.cod_vendedor, f.cod_cliente
